@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="NsB-C7-PSp">
+            <objects>
+                <viewController id="0Sz-QH-HIn" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gUZ-EQ-etK"/>
+                        <viewControllerLayoutGuide type="bottom" id="5ms-3i-TEx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pvb-MM-K0T">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DcV-ea-97V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100" y="-281"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="5fv-gJ-fUx">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wDr-lR-W9Q" customClass="SettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Gg-kn-hOc"/>
+                        <viewControllerLayoutGuide type="bottom" id="B1G-y7-eMU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zCY-s2-Xup">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_Bg" translatesAutoresizingMaskIntoConstraints="NO" id="Pnh-2w-GPb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <animations/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3UX-ig-5Lr">
+                                <rect key="frame" x="251" y="325" width="51" height="31"/>
+                                <animations/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm6-ur-h9o">
+                                <rect key="frame" x="251" y="274" width="51" height="31"/>
+                                <animations/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qX1-OH-2Ti">
+                                <rect key="frame" x="251" y="203" width="51" height="31"/>
+                                <animations/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VCL-lV-Znw">
+                                <rect key="frame" x="251" y="150" width="51" height="31"/>
+                                <animations/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wOb-D9-HlP">
+                                <rect key="frame" x="251" y="85" width="51" height="31"/>
+                                <animations/>
+                            </switch>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hm6-ur-h9o" firstAttribute="centerX" secondItem="wOb-D9-HlP" secondAttribute="centerX" id="3Wu-Pt-GNb"/>
+                            <constraint firstItem="Pnh-2w-GPb" firstAttribute="leading" secondItem="zCY-s2-Xup" secondAttribute="leading" id="4UU-6D-6cn"/>
+                            <constraint firstItem="3UX-ig-5Lr" firstAttribute="top" secondItem="hm6-ur-h9o" secondAttribute="bottom" constant="20" id="6Jb-vP-s61"/>
+                            <constraint firstItem="hm6-ur-h9o" firstAttribute="top" secondItem="qX1-OH-2Ti" secondAttribute="bottom" constant="40" id="BXK-UI-rFv"/>
+                            <constraint firstItem="qX1-OH-2Ti" firstAttribute="centerX" secondItem="wOb-D9-HlP" secondAttribute="centerX" id="CPG-E0-A5t"/>
+                            <constraint firstAttribute="trailing" secondItem="Pnh-2w-GPb" secondAttribute="trailing" id="IEY-0v-jV7"/>
+                            <constraint firstItem="Pnh-2w-GPb" firstAttribute="top" secondItem="zCY-s2-Xup" secondAttribute="top" id="JdX-tx-4Ji"/>
+                            <constraint firstItem="VCL-lV-Znw" firstAttribute="top" secondItem="wOb-D9-HlP" secondAttribute="bottom" constant="34" id="M1D-Hl-ItF"/>
+                            <constraint firstItem="B1G-y7-eMU" firstAttribute="top" secondItem="Pnh-2w-GPb" secondAttribute="bottom" id="Wyx-z4-T1b"/>
+                            <constraint firstAttribute="trailing" secondItem="3UX-ig-5Lr" secondAttribute="trailing" constant="20" id="ioW-gx-j67"/>
+                            <constraint firstItem="qX1-OH-2Ti" firstAttribute="top" secondItem="VCL-lV-Znw" secondAttribute="bottom" constant="22" id="mIA-Eh-7cv"/>
+                            <constraint firstItem="VCL-lV-Znw" firstAttribute="centerX" secondItem="wOb-D9-HlP" secondAttribute="centerX" id="owe-aX-3c2"/>
+                            <constraint firstItem="wOb-D9-HlP" firstAttribute="top" secondItem="zCY-s2-Xup" secondAttribute="top" constant="85" id="u9Y-41-a9V"/>
+                            <constraint firstItem="3UX-ig-5Lr" firstAttribute="centerX" secondItem="wOb-D9-HlP" secondAttribute="centerX" id="uoF-DQ-2U8"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5w-J0-FBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="595" y="-271"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Settings_Bg" width="315" height="555"/>
+    </resources>
+</document>
