@@ -36,7 +36,7 @@
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     //右滑返回失效问题
-    [MLTransition validatePanPackWithMLTransitionGestureRecognizerType:(MLTransitionGestureRecognizerTypeScreenEdgePan)];
+    [MLTransition validatePanPackWithMLTransitionGestureRecognizerType:(MLTransitionGestureRecognizerTypePan)];
 }
 
 

@@ -32,6 +32,20 @@
 {
     return [NSURL URLWithString:self.storyModel.image];
 }
+/** 返回头部文字 */
+- (NSString *)storyImageTitleName
+{
+    return self.storyModel.title;
+}
+/** 返回头部图片来源 */
+- (NSString *)storyImageSource
+{
+    return [NSString stringWithFormat:@"图片：%@",self.storyModel.image_source];
+}
+-(BOOL)hasBody
+{
+    return self.storyModel.body?YES:NO;
+}
 - (NSString *)storyHTML
 {
     /**

@@ -14,6 +14,8 @@
 
 /** 头部数据数组 */
 @property (nonatomic,strong)NSArray *topStories;
+/** 存放新闻id数组 */
+@property (nonatomic,strong)NSMutableArray *topStoriesId;
 /** 头部滚动图片数量 */
 @property (nonatomic,assign)NSInteger indexNumber;
 /** 头部图片地址 */
@@ -25,6 +27,8 @@
 
 /** 页面数据数组 */
 @property (nonatomic,strong)NSMutableArray *stories;
+/** 存放新闻id数组 */
+@property (nonatomic,strong)NSMutableArray *storiesId;
 /** 页面行数 */
 @property (nonatomic,assign)NSInteger rowNumber;
 /** 单元格标题 */

@@ -26,4 +26,6 @@
 - (NSURL *)imageURLForRow:(NSInteger)row;
 /** 内容ID */
 - (NSString *)IDForRow:(NSInteger)row;
+/** 内容页id数组 */
+@property (nonatomic,strong)NSMutableArray *storiesId;
 @end

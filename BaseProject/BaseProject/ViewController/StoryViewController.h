@@ -11,4 +11,8 @@
 @interface StoryViewController : UIViewController
 - (instancetype)initWithStoryId:(NSString *)storyId;
 @property (nonatomic,strong)NSString *storyId;
+/** 内容也数组 */
+@property (nonatomic,strong)NSArray *storyNews;
+/** 当前的新闻 */
+@property (nonatomic)NSInteger index;
 @end

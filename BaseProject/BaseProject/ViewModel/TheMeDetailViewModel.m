@@ -49,6 +49,17 @@
 {
     return self.stories.count;
 }
+-(NSMutableArray *)storiesId
+{
+    if (!_storiesId) {
+        _storiesId = [NSMutableArray new];
+        for (int i = 0; i <self.rowNumber; i ++) {
+            NSString *aid = [self IDForRow:i];
+            [_storiesId addObject:aid];
+        }
+    }
+    return _storiesId;
+}
 - (TheMeDetailStoriesModel *)modelForRow:(NSInteger)row
 {
     return self.stories[row];

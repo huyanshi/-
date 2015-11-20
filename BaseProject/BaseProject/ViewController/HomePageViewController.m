@@ -115,6 +115,8 @@
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
     StoryViewController *vc = [[StoryViewController alloc]initWithStoryId:[self.homePageVM topIdForIndexPic:index]];
+    vc.storyNews = [self.homePageVM.topStoriesId copy];
+    vc.index = index;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -236,6 +238,8 @@ kRemoveCellSeparator
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     StoryViewController *vc = [[StoryViewController alloc]initWithStoryId:[self.homePageVM IDForRow:indexPath.row]];
+    vc.storyNews = [self.homePageVM.storiesId copy];
+    vc.index = indexPath.row;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

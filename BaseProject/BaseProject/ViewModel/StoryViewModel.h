@@ -20,5 +20,11 @@
 - (NSString *)storyHTML;
 /** 返回头部图片 */
 - (NSURL *)storyImageURL;
+/** 返回头部文字 */
+- (NSString *)storyImageTitleName;
+/** 返回头部图片表示 */
+- (NSString *)storyImageSource;
+/** 判断是有body */
+@property (nonatomic)BOOL hasBody;
 
 @end

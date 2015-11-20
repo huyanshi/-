@@ -43,6 +43,17 @@
         completionHandle(error);
     }];
 }
+- (NSMutableArray *)topStoriesId
+{
+    if (!_topStoriesId) {
+        _topStories = [NSMutableArray new];
+        for (int i = 0; i <self.indexNumber; i ++) {
+            NSString *aid = [self topIdForIndexPic:i];
+            [_topStoriesId addObject:aid];
+        }
+    }
+    return _topStoriesId;
+}
 /** 头部滚动图片数量 */
 - (NSInteger)indexNumber
 {
@@ -74,6 +85,17 @@
 -(NSInteger)rowNumber
 {
     return self.stories.count;
+}
+- (NSMutableArray *)storiesId
+{
+    if (!_storiesId) {
+        _storiesId = [NSMutableArray new];
+        for (int i = 0 ; i <self.rowNumber; i ++) {
+            NSString *aid = [self IDForRow:i];
+            [_storiesId addObject:aid];
+        }
+    }
+    return _storiesId;
 }
 /** 页面数据模型 */
 - (HomePageStoriesModel *)modelForRow:(NSInteger)row

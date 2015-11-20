@@ -106,6 +106,8 @@ kRemoveCellSeparator
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     StoryViewController *vc = [[StoryViewController alloc]initWithStoryId:[self.theMeDetailVM IDForRow:indexPath.row]];
+    vc.index = indexPath.row;
+    vc.storyNews = [self.theMeDetailVM.storiesId copy];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

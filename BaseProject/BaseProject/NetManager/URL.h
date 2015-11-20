@@ -20,4 +20,4 @@
 //首页获取之前消息
 //http://news-at.zhihu.com/api/4/stories/before/20151030?client=0
 //内容页 ID对应相应的内容页
-//http://news-at.zhihu.com/api/4/story/7423544
+//http://news-at.zhihu.com/api/4/story/7455779
