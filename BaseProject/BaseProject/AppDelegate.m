@@ -12,8 +12,9 @@
 #import "TheMeViewController.h"
 #import "HomePageViewController.h"
 #import "TheMeDetailViewController.h"
+#import "ScrollDisplayViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<ScrollDisplayViewControllerDelegate>
 
 @end
 
@@ -27,7 +28,7 @@
 //    }];
     
     
-    self.window.rootViewController = self.sideMenu;
+    [self welcome];
     [self configGlobalUIStyle]; //配置全局UI样式
     return YES;
 }
@@ -69,6 +70,53 @@
         
     }
     return _sideMenu;
+}
+- (void)welcome
+{
+    NSDictionary *infoDic=[[NSBundle mainBundle] infoDictionary];
+    /*
+     版本号:
+     version:正式发布版本号，用户只能看到version
+     build:测试版本号，是对于程序员来说的
+     */
+    //    NSLog(@"infoDic %@", infoDic);
+    NSString *key =@"CFBundleShortVersionString";
+    NSString *currentVersion=infoDic[key];
+    //已运行过的版本号需要持久化处理，通常存储在userDefault中
+    NSString *runVersion=[[NSUserDefaults standardUserDefaults] stringForKey:key];
+    if (runVersion==nil || ![runVersion isEqualToString:currentVersion] ) {
+        //没运行过 或者 版本号不一致，则显示欢迎页
+        NSLog(@"显示欢迎页,window根视图设置为欢迎控制器对象");
+        //创建图片数组
+        UIViewController *welcome = [[UIViewController alloc]init];
+        self.window.rootViewController = welcome;
+        [self.window makeKeyWindow];
+        welcome.view.frame = CGRectMake(0, 0, kWindowW, kWindowH);
+        NSArray *welcomeImgs = @[@"welcome1",@"welcome2",@"welcome3",@"welcome4"];
+        ScrollDisplayViewController *WelcomeScroll = [[ScrollDisplayViewController alloc]initWithImgNames:welcomeImgs];
+        WelcomeScroll.canCycle = NO;
+        WelcomeScroll.autoCycle = NO;
+        WelcomeScroll.location = 2;
+        WelcomeScroll.delegate = self;
+        [welcome addChildViewController:WelcomeScroll];
+        [welcome.view addSubview:WelcomeScroll.view];
+        [WelcomeScroll.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(welcome.view);
+        }];
+        //保存新的版本号,防止下次运行再显示欢迎页
+        [[NSUserDefaults standardUserDefaults] setValue:currentVersion forKey:key];
+    }else{
+        self.window.rootViewController = self.sideMenu;
+    }
+
+}
+#pragma mark -
+- (void)scrollDisplayViewController:(ScrollDisplayViewController *)scrollDisplayViewController didSelectedIndex:(NSInteger)index
+{
+    NSLog(@"%ld",index);
+    if (index == 3) {
+        self.window.rootViewController = self.sideMenu;
+    }
 }
 
 @end

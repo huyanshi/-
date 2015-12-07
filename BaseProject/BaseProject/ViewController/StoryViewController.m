@@ -21,8 +21,12 @@
 @property (nonatomic,strong)UILabel *sourceLabel;             //头部视图版权文字
 /** 头部刷新 */
 @property (nonatomic,strong)GradientView *blurView;
+/** 低部刷新 */
+@property (nonatomic,strong)GradientView *blurbottomView;
 @property (nonatomic,strong)UIImageView *imageView;
 @property (nonatomic,strong)UIView *statusBarBackground;
+/** 底部bar*/
+@property (nonatomic,strong)UIView *statusButtomBarBackGround;
 @property (nonatomic)BOOL stausBarFlag;
 @property (nonatomic,strong)UIImageView *refreshImageView;
 /** 下滑刷新 滑到对应位置时调整arrow方向*/
@@ -31,6 +35,7 @@
 @property (nonatomic)BOOL triggered;
 //判断是否有图
 @property (nonatomic)BOOL hasImage;
+
 
 
 
@@ -82,6 +87,7 @@
             [_webView loadHTMLString:[self.storyVM storyHTML] baseURL:nil];
         }else{
             [_webView loadRequest:[NSURLRequest requestWithURL:[self.storyVM storyURL]]];
+            
         }
         if ([self.storyVM storyImageURL]) {
             self.hasImage =YES;
@@ -92,12 +98,13 @@
           //对scrollView做基本配置
         _webView.scrollView.delegate = self;
         _webView.scrollView.clipsToBounds =NO;
-        _webView.scrollView.showsVerticalScrollIndicator =false;
+        _webView.scrollView.showsVerticalScrollIndicator =NO;
         if (self.hasImage) {
             [_webView.scrollView addSubview:self.webHeaderView];
         }else{
         [self loadNormalHeader];
         }
+//        [_webView.scrollView addSubview:self.blurbottomView];
     }
     return _webView;
 }
@@ -133,6 +140,26 @@
     }
     return _blurView;
 }
+-(GradientView *)blurbottomView
+{
+    if (!_blurbottomView) {
+        _blurbottomView = [[GradientView alloc]initWithFrame:CGRectMake(0, kWindowH+85, kWindowH, 85) type:TRANSPARENT_GRADIENT_TWICE_TYPE];
+        UILabel *refreshLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, kWindowH+45, kWindowW, 45)];
+        if (self.index >= self.storyNews.count) {
+            refreshLabel.text = @"已经是最后一篇了";
+            refreshLabel.frame = CGRectMake(0, kWindowH+45, kWindowW, 45);
+        }else{
+            refreshLabel.text = @"加载下一篇";
+        }
+        refreshLabel.textAlignment = NSTextAlignmentCenter;
+        refreshLabel.textColor = kRGBColor(215, 215, 215);
+        refreshLabel.font = [UIFont systemFontOfSize:14];
+        [_blurbottomView addSubview:refreshLabel];
+        
+    }
+    return _blurbottomView;
+}
+
 -(myUILabel *)titleLabel
 {
     if (!_titleLabel) {
@@ -202,6 +229,20 @@
     }
     return _statusBarBackground;
 }
+-(UIView *)statusButtomBarBackGround
+{
+    if (!_statusButtomBarBackGround) {
+        _statusButtomBarBackGround = [UIView new];
+        [self.view addSubview:_statusButtomBarBackGround];
+        [_statusButtomBarBackGround mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(20);
+            make.bottom.mas_equalTo(20);
+            
+        }];
+    }
+    return _statusButtomBarBackGround;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.stausBarFlag = NO;
@@ -215,15 +256,12 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     //避免webScrollView的ContentView过长 挡住底层View
     self.view.clipsToBounds = YES;
-    if (self.hasImage == NO) {
-        self.statusBarBackground.backgroundColor = [UIColor whiteColor];
-    }
-    
     
     [Factory addBackItemToVC:self];
     self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.storyVM getDataFromNetCompleteHandle:^(NSError *error) {
             [self.view addSubview:self.webView];
@@ -234,8 +272,6 @@
             }];
         }];
     });
-
-    
     // Do any additional setup after loading the view.
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -249,10 +285,12 @@
     [super viewWillAppear:YES];
     //避免因含有navBar而对scrollInsets做自动调整
     self.automaticallyAdjustsScrollViewInsets = NO;
-
-
 }
-
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self hideProgress];
+    [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
+}
 //加载普通header
 - (void)loadNormalHeader
 {
@@ -270,25 +308,37 @@
     [self.webView.scrollView addSubview:refreshLabel];
     self.refreshImageView.frame = CGRectMake(kWindowW/2 - 47, -30, 15, 15);
     [self.webView.scrollView addSubview:self.refreshImageView];
-    
+}
+/** 下载底部刷新*/
+- (void)loadBottom
+{
+    UILabel *refreshLabel = [[UILabel alloc]initWithFrame:CGRectMake(12, kWindowH+45, kWindowW, 45)];
+    if (self.index >= self.storyNews.count) {
+        refreshLabel.text = @"已经是最后一篇了";
+        refreshLabel.frame = CGRectMake(0, kWindowH+45, kWindowW, 45);
+    }else{
+        refreshLabel.text = @"加载下一篇";
+    }
+    refreshLabel.textAlignment = NSTextAlignmentCenter;
+    refreshLabel.textColor = kRGBColor(215, 215, 215);
+    refreshLabel.font = [UIFont systemFontOfSize:14];
+    [self.webView.scrollView addSubview:refreshLabel];
 
 }
-
 - (void)bottomView
 {
     UIView *bottomView = [UIView new];
-    [self.view addSubview:bottomView];
+//    [self.view addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(0);
         make.height.mas_equalTo(44);
     }];
-    
 }
 #pragma mark - scrollView
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //判断是否含图
-    if (self.hasImage) {
+    if (1) {
         CGFloat incrementY = scrollView.contentOffset.y;
         if (incrementY < 0) {
             //if (incrementY < 0) {
@@ -296,8 +346,6 @@
             self.sourceLabel.frame = CGRectMake(15, _orginalHeight - 20 -incrementY, kWindowW - 30, 15);
             //不断添加删除blurView以保证frame正确
             self.blurView.frame = CGRectMake(0, -85 -incrementY, kWindowW, _orginalHeight +85);
-//            [self.blurView.layer.sublayers[0] removeFromSuperlayer];
-//            [self.blurView insertTwiceTransparentGradient];
             //如果下拉超过65pixels则改变图片方向
             if (incrementY <= -65) {
                 //如果此时是第一次检测到松手则加载上一篇
@@ -305,7 +353,7 @@
                 if ((!self.dragging && !self.triggered)) {
                     [self loadNewArticle:YES];
                     self.triggered = YES;
-                    //index不能为零，
+                    
                     return;
                 }
             }else{
@@ -314,31 +362,41 @@
             //使titleLabel不被遮挡
             [_imageView bringSubviewToFront:self.titleLabel];
             [_imageView bringSubviewToFront:self.sourceLabel];
+        }
             //监听contentOffsetY以改变StatusBarUI
             if (incrementY >kWindowW/320*223) {
                 if (self.stausBarFlag) {
-                    self.stausBarFlag =false;
+                    self.stausBarFlag =NO;
+#warning 内容缺失
+                    
                 }
                 self.statusBarBackground.backgroundColor = [UIColor whiteColor];
             }else{
-//                        if (!self.stausBarFlag) {
-//                            self.stausBarFlag = YES;
-//                            return;
-//                        }
+                if (! self.stausBarFlag) {
+                    self.stausBarFlag = YES;
+#warning 内容缺失
+                }
                 self.statusBarBackground.backgroundColor = [UIColor clearColor];
             }
-            
-        }
         [self.webHeaderView layoutWebHeaderViewForScrollViewOffset:scrollView.contentOffset];
         
     }else{
-//        
+        //如果下拉超过40pixels则改变图片方向
+        if (self.webView.scrollView.contentOffset.y <= -40) {
+            self.arrowState = YES;
+            //如果此时是第一次检测到松手则加载上一篇
+            if ((!self.dragging && !self.triggered)) {
+                [self loadNewArticle:YES];
+                self.triggered = YES;
+                return;
+            }
+
+        }else{
+            self.arrowState =NO;
+        }
+       
     }
-
-
-
-        
-    
+   
 }
 //记录下啦状态
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -359,13 +417,13 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     //无图的情况
-    if (self.hasImage) {
+    if (!self.hasImage) {
         return UIStatusBarStyleDefault;
     }
     if (self.stausBarFlag) {
         return UIStatusBarStyleLightContent;
     }
-    return UIStatusBarStyleDefault;
+        return UIStatusBarStyleDefault;
 }
 //加载新文章
 - (void)loadNewArticle:(BOOL)previous
@@ -376,9 +434,7 @@
     //生成新View并传入新数据
     if (self.index < self.storyNews.count &&self.index >0) {
         self.index  = self.index -1;
-
         NSString *stotyId = self.storyNews[self.index];
-    
     StoryViewController *toVC = [[StoryViewController alloc]initWithStoryId:stotyId];
         toVC.index = self.index;
         toVC.storyNews = self.storyNews;
@@ -392,13 +448,13 @@
     toView.transform = offScreenUp;
     [self.view addSubview:toView];
     [self addChildViewController:toVC];
+        
     //动画开始
     [UIView animateWithDuration:0.2 animations:^{
        //fromView下滑出屏幕，新View滑入屏幕
         fromView.transform = offScreenDown;
         toView.transform = CGAffineTransformIdentity;
     }completion:^(BOOL finished) {
-        NSLog(@"动画执行完成");
         //动画完成后清理底层webView、statusBarBackground，以及滑出屏幕的fromView，这里也有问题，多次加载新文章会每次留一层UIView 待解决
         [self.webView removeFromSuperview];
         [self.statusBarBackground removeFromSuperview];
@@ -418,14 +474,15 @@
 /** 解决webView中点击内容后出现的BUG */
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if (webView.request !=nil) {
-        if (request != webView.request) {
-            return NO;
-        }
-        return YES;
-    }else{
-        return YES;
-    }
+//    if (webView.request !=nil) {
+//        if (request != webView.request) {
+//            return NO;
+//        }
+//        return YES;
+//    }else{
+//        return YES;
+//    }
+    return YES;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

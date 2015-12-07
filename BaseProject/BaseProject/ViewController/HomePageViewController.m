@@ -115,6 +115,7 @@
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
     StoryViewController *vc = [[StoryViewController alloc]initWithStoryId:[self.homePageVM topIdForIndexPic:index]];
+    NSLog(@"%ld",index);
     vc.storyNews = [self.homePageVM.topStoriesId copy];
     vc.index = index;
     [self.navigationController pushViewController:vc animated:YES];
@@ -159,6 +160,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [Factory addMenuItemToVC:self];
     self.title = @"今日热闻";
        //设置透明NaviBar

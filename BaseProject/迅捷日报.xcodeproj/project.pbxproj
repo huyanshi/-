@@ -81,6 +81,7 @@
 		85A5ED841BF4716E0034F133 /* TheMeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A5ED831BF4716E0034F133 /* TheMeDetailViewController.m */; };
 		85A5ED871BF471890034F133 /* StoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A5ED861BF471890034F133 /* StoryViewController.m */; };
 		85A5ED8C1BF47F3B0034F133 /* Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A5ED8B1BF47F3B0034F133 /* Factory.m */; };
+		85CCF5981C02E8FB00E2E64E /* ScrollDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CCF5971C02E8FB00E2E64E /* ScrollDisplayViewController.m */; };
 		85CEFE081BF6ED750061410B /* CLOverlayKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CEFE071BF6ED750061410B /* CLOverlayKit.m */; };
 		85CEFE0B1BF715800061410B /* TheMeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CEFE0A1BF715800061410B /* TheMeModel.m */; };
 		85CEFE0E1BF71E7D0061410B /* HomePageBeforeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CEFE0D1BF71E7D0061410B /* HomePageBeforeModel.m */; };
@@ -199,7 +200,6 @@
 		851BF1F61BFC9FED00B8DC98 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		851BF1F71BFC9FED00B8DC98 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		8529DABB1BF9EEA000685DEA /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
-		852E72611BF4400700CEB27A /* URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URL.h; sourceTree = "<group>"; };
 		852E72621BF4409A00CEB27A /* HomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageModel.h; sourceTree = "<group>"; };
 		852E72631BF4409A00CEB27A /* HomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageModel.m; sourceTree = "<group>"; };
 		852E72681BF444B000CEB27A /* TheMeDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheMeDetailModel.h; sourceTree = "<group>"; };
@@ -224,6 +224,8 @@
 		85A5ED861BF471890034F133 /* StoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryViewController.m; sourceTree = "<group>"; };
 		85A5ED8A1BF47F3B0034F133 /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Factory.h; path = Category/Factory.h; sourceTree = "<group>"; };
 		85A5ED8B1BF47F3B0034F133 /* Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Factory.m; path = Category/Factory.m; sourceTree = "<group>"; };
+		85CCF5961C02E8FB00E2E64E /* ScrollDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollDisplayViewController.h; sourceTree = "<group>"; };
+		85CCF5971C02E8FB00E2E64E /* ScrollDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollDisplayViewController.m; sourceTree = "<group>"; };
 		85CEFE061BF6ED750061410B /* CLOverlayKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOverlayKit.h; sourceTree = "<group>"; };
 		85CEFE071BF6ED750061410B /* CLOverlayKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOverlayKit.m; sourceTree = "<group>"; };
 		85CEFE091BF715800061410B /* TheMeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheMeModel.h; sourceTree = "<group>"; };
@@ -521,7 +523,6 @@
 			children = (
 				3886C0BC1BD74AFE0014E661 /* BaseNetManager.h */,
 				3886C0BD1BD74AFE0014E661 /* BaseNetManager.m */,
-				852E72611BF4400700CEB27A /* URL.h */,
 				852E72771BF4578D00CEB27A /* XunJieNewsNetManager.h */,
 				852E72781BF4578D00CEB27A /* XunJieNewsNetManager.m */,
 			);
@@ -545,6 +546,7 @@
 			children = (
 				85A5ED8A1BF47F3B0034F133 /* Factory.h */,
 				85A5ED8B1BF47F3B0034F133 /* Factory.m */,
+				85CCF5951C02E8FB00E2E64E /* ScrollDisplay */,
 				3804CE481BD758F10046C8C8 /* Category */,
 			);
 			path = Util;
@@ -628,6 +630,15 @@
 				857221631BFB5F9700FCE036 /* NTParallaxView.m */,
 			);
 			path = NTParallaxView;
+			sourceTree = "<group>";
+		};
+		85CCF5951C02E8FB00E2E64E /* ScrollDisplay */ = {
+			isa = PBXGroup;
+			children = (
+				85CCF5961C02E8FB00E2E64E /* ScrollDisplayViewController.h */,
+				85CCF5971C02E8FB00E2E64E /* ScrollDisplayViewController.m */,
+			);
+			path = ScrollDisplay;
 			sourceTree = "<group>";
 		};
 		85CEFE0F1BF72A4F0061410B /* DSNavigationBar */ = {
@@ -842,6 +853,7 @@
 				3886C09B1BD748830014E661 /* AppDelegate.m in Sources */,
 				85F900181BFDC00000A4788C /* GradientView.m in Sources */,
 				3885C8981BE8E88D009441EA /* iCarousel.m in Sources */,
+				85CCF5981C02E8FB00E2E64E /* ScrollDisplayViewController.m in Sources */,
 				3835CFB71BD90E150024CA48 /* ViewController.m in Sources */,
 				85A5ED7E1BF471220034F133 /* TheMeViewController.m in Sources */,
 				3804CE511BD758F10046C8C8 /* AppDelegate+Category.m in Sources */,

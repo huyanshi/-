@@ -46,7 +46,7 @@
 - (NSMutableArray *)topStoriesId
 {
     if (!_topStoriesId) {
-        _topStories = [NSMutableArray new];
+        _topStoriesId = [NSMutableArray new];
         for (int i = 0; i <self.indexNumber; i ++) {
             NSString *aid = [self topIdForIndexPic:i];
             [_topStoriesId addObject:aid];
